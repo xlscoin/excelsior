@@ -924,7 +924,7 @@ uint64_t Core::getDifficultyForNextBlock() const {
 
   uint8_t nextBlockMajorVersion = getBlockMajorVersionForHeight(topBlockIndex);
 
-  size_t blocksCount = std::min(static_cast<size_t>(topBlockIndex), currency.difficultyBlocksCountByBlockVersion(nextBlockMajorVersion, topBlockIndex));
+  size_t blocksCount = std::min(static_cast<size_t>(topBlockIndex), CryptoNote::parameters::DIFFICULTY_BLOCKS_COUNT);
 
   auto timestamps = mainChain->getLastTimestamps(blocksCount);
   auto difficulties = mainChain->getLastCumulativeDifficulties(blocksCount);
@@ -1568,16 +1568,7 @@ bool Core::getBlockTemplate(BlockTemplate& b, const AccountPublicAddress& adr, c
      https://github.com/loki-project/loki/pull/26 */
 
   /* How many blocks we look in the past to calculate the median timestamp */
-  uint64_t blockchain_timestamp_check_window;
-
-  if (height >= CryptoNote::parameters::LWMA_2_DIFFICULTY_BLOCK_INDEX)
-  {
-      blockchain_timestamp_check_window = CryptoNote::parameters::BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW_V3;
-  }
-  else
-  {
-      blockchain_timestamp_check_window = CryptoNote::parameters::BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW;
-  }
+  uint64_t blockchain_timestamp_check_window = CryptoNote::parameters::BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW;
 
   /* Skip the first N blocks, we don't have enough blocks to calculate a
      proper median yet */

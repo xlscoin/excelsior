@@ -30,30 +30,12 @@ public:
 
   size_t timestampCheckWindow(uint32_t blockHeight) const
   {
-      if (blockHeight >= CryptoNote::parameters::LWMA_2_DIFFICULTY_BLOCK_INDEX_V3)
-      {
-          return CryptoNote::parameters::BLOCKCHAIN_TIMESTAMP_CHECK_WINDOW_V3;
-      }
-      else
-      {
-          return m_timestampCheckWindow;
-      }
+      return m_timestampCheckWindow;
   }
 
   uint64_t blockFutureTimeLimit(uint32_t blockHeight) const
   {
-      if (blockHeight >= CryptoNote::parameters::LWMA_2_DIFFICULTY_BLOCK_INDEX_V2)
-      {
-          return CryptoNote::parameters::CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT_V4;
-      }
-      else if (blockHeight >= CryptoNote::parameters::LWMA_2_DIFFICULTY_BLOCK_INDEX)
-      {
-          return CryptoNote::parameters::CRYPTONOTE_BLOCK_FUTURE_TIME_LIMIT_V3;
-      }
-      else
-      {
-          return m_blockFutureTimeLimit;
-      }
+      return m_blockFutureTimeLimit;
   }
 
   uint64_t moneySupply() const { return m_moneySupply; }
@@ -61,9 +43,6 @@ public:
   uint64_t genesisBlockReward() const { return m_genesisBlockReward; }
 
   size_t rewardBlocksWindow() const { return m_rewardBlocksWindow; }
-  uint32_t zawyDifficultyBlockIndex() const { return m_zawyDifficultyBlockIndex; }
-  size_t zawyDifficultyV2() const { return m_zawyDifficultyV2; }
-  uint8_t zawyDifficultyBlockVersion() const { return m_zawyDifficultyBlockVersion; }
   size_t blockGrantedFullRewardZone() const { return m_blockGrantedFullRewardZone; }
   size_t blockGrantedFullRewardZoneByBlockVersion(uint8_t blockMajorVersion) const;
   size_t minerTxBlobReservedSize() const { return m_minerTxBlobReservedSize; }
@@ -73,31 +52,14 @@ public:
 
   uint64_t minimumFee() const { return m_mininumFee; }
   uint64_t defaultDustThreshold(uint32_t height) const {
-      if (height >= CryptoNote::parameters::DUST_THRESHOLD_V2_HEIGHT)
-      {
-          return CryptoNote::parameters::DEFAULT_DUST_THRESHOLD_V2;
-      }
-
       return m_defaultDustThreshold;
   }
   uint64_t defaultFusionDustThreshold(uint32_t height) const {
-      if (height >= CryptoNote::parameters::FUSION_DUST_THRESHOLD_HEIGHT_V2)
-      {
-          return CryptoNote::parameters::DEFAULT_DUST_THRESHOLD_V2;
-      }
-
       return m_defaultDustThreshold;
   }
 
   uint64_t difficultyTarget() const { return m_difficultyTarget; }
   size_t difficultyWindow() const { return m_difficultyWindow; }
-size_t difficultyWindowByBlockVersion(uint8_t blockMajorVersion) const;
-  size_t difficultyLag() const { return m_difficultyLag; }
-size_t difficultyLagByBlockVersion(uint8_t blockMajorVersion) const;
-  size_t difficultyCut() const { return m_difficultyCut; }
-size_t difficultyCutByBlockVersion(uint8_t blockMajorVersion) const;
-  size_t difficultyBlocksCount() const { return m_difficultyWindow + m_difficultyLag; }
-size_t difficultyBlocksCountByBlockVersion(uint8_t blockMajorVersion, uint32_t height) const;
 
   size_t maxBlockSizeInitial() const { return m_maxBlockSizeInitial; }
   uint64_t maxBlockSizeGrowthSpeedNumerator() const { return m_maxBlockSizeGrowthSpeedNumerator; }
@@ -154,8 +116,6 @@ size_t difficultyBlocksCountByBlockVersion(uint8_t blockMajorVersion, uint32_t h
   bool parseAmount(const std::string& str, uint64_t& amount) const;
 
   uint64_t getNextDifficulty(uint8_t version, uint32_t blockIndex, std::vector<uint64_t> timestamps, std::vector<uint64_t> cumulativeDifficulties) const;
-  uint64_t nextDifficulty(uint8_t version, uint32_t blockIndex, std::vector<uint64_t> timestamps, std::vector<uint64_t> cumulativeDifficulties) const;
-
 
   bool checkProofOfWorkV1(const CachedBlock& block, uint64_t currentDifficulty) const;
   bool checkProofOfWorkV2(const CachedBlock& block, uint64_t currentDifficulty) const;
@@ -190,9 +150,6 @@ private:
   uint64_t m_genesisBlockReward;
 
   size_t m_rewardBlocksWindow;
-  uint32_t m_zawyDifficultyBlockIndex;
-  size_t m_zawyDifficultyV2;
-  uint8_t m_zawyDifficultyBlockVersion;
   size_t m_blockGrantedFullRewardZone;
   size_t m_minerTxBlobReservedSize;
 
@@ -275,9 +232,6 @@ public:
   CurrencyBuilder& genesisBlockReward(uint64_t val) { m_currency.m_genesisBlockReward = val; return *this; }
 
   CurrencyBuilder& rewardBlocksWindow(size_t val) { m_currency.m_rewardBlocksWindow = val; return *this; }
-  CurrencyBuilder& zawyDifficultyBlockIndex(uint32_t val) { m_currency.m_zawyDifficultyBlockIndex = val; return *this; }
-  CurrencyBuilder& zawyDifficultyV2(size_t val) { m_currency.m_zawyDifficultyV2 = val; return *this; }
-  CurrencyBuilder& zawyDifficultyBlockVersion(uint8_t val) { m_currency.m_zawyDifficultyBlockVersion = val; return *this; }
   CurrencyBuilder& blockGrantedFullRewardZone(size_t val) { m_currency.m_blockGrantedFullRewardZone = val; return *this; }
   CurrencyBuilder& minerTxBlobReservedSize(size_t val) { m_currency.m_minerTxBlobReservedSize = val; return *this; }
 
