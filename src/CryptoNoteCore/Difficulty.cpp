@@ -23,7 +23,7 @@ uint64_t nextDifficulty(std::vector<uint64_t> timestamps, std::vector<uint64_t> 
        hashrate */
     if (timestamps.size() < static_cast<uint64_t>(N+1))
     {
-        return 10000;
+        return 500;
     }
 
     for (int64_t i = 1; i <= N; i++)
