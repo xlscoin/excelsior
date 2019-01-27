@@ -14,8 +14,8 @@ $ python3.6 makechange.py
 Make two wallets and fill one or both with some funds, or start mining to it.
 Open the wallets with turtle-serivce like so:
 
-./turtle-service -w walletA.wallet -p yourpass --rpc-password test --bind-port 8070
-./turtle-service -w walletB.wallet -p yourpass --rpc-password test --bind-port 8071
+./xls-service -w walletA.wallet -p test1.wallet --rpc-password test --bind-port 4051
+./xls-service -w walletB.wallet -p test2.wallet --rpc-password test --bind-port 4052
 
 Feel free to change these parameters if needed of course.
 
@@ -33,11 +33,11 @@ import sys
 from threading import Thread
 
 # Forks adjust as needed
-moveDecimal = 100  # TRTL has 2 decimals so 100 is the divide/multiply factor
-minAmount = 100 * moveDecimal  # min number for amount to xfer
-maxAmount = 5000 * moveDecimal  # max number for amount to xfer
-anonymity = 3
-fee = 10 # atomic units, TRTL would be 0.10 as the tx network fee
+moveDecimal = 100000  # TRTL has 2 decimals so 100 is the divide/multiply factor
+minAmount = 1 * moveDecimal  # min number for amount to xfer
+maxAmount = 50 * moveDecimal  # max number for amount to xfer
+anonymity = 7
+fee = 11 # atomic units, TRTL would be 0.10 as the tx network fee
 
 def getAddress(host, port, rpcPassword):
     payload = {
@@ -108,10 +108,10 @@ def sendTXs(host, port, rpcPassword, sender, receiver):
 
 
 walletdHostA = "127.0.0.1"
-walletdPortA = "8070"
+walletdPortA = "4051"
 
 walletdHostB = "127.0.0.1"
-walletdPortB = "8071"
+walletdPortB = "4052"
 
 rpcPasswordA = "test"
 rpcPasswordB = "test"
