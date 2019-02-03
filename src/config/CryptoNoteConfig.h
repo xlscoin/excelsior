@@ -2,7 +2,7 @@
 // Copyright (c) 2014-2018, The Monero Project
 // Copyright (c) 2018, The TurtleCoin Developers
 // Copyright (c) 2018, The DeroGold Association
-// Copyright (c) 2019, The Excelsior Developer
+// Copyright (c) 2019, The Excelsior Developers
 //
 // Please see the included LICENSE file for more information.
 
@@ -36,7 +36,7 @@ const unsigned EMISSION_SPEED_FACTOR                         = 24;
 static_assert(EMISSION_SPEED_FACTOR <= 8 * sizeof(uint64_t), "Bad EMISSION_SPEED_FACTOR");
 
 /* Premine amount */
-const uint64_t GENESIS_BLOCK_REWARD                          = UINT64_C(1234567890);
+const uint64_t GENESIS_BLOCK_REWARD                          = UINT64_C(1100000000000);
 
 /* How to generate a premine:
 
@@ -58,13 +58,13 @@ Excelsiord --print-genesis-tx --genesis-block-reward-address XL4QZU4Nsxm6JdXWetm
 * You should see your premine appear in the previously generated wallet.
 
 */
-const char GENESIS_COINBASE_TX_HEX[] = "015001ff0001d285d8cc040289a21aa140faff4f1c11bfc012b79d814db3a8ed890eccac5b9f0f9f286663d82101862b52488fc31e62e26bf66e50314b5355974633eb1579e236a6af3a415187c9";
+const char GENESIS_COINBASE_TX_HEX[] = "015001ff000180f0efe8812002a8f723cdbc4901f9a60501e5d57e2fa3f0273ca5dc22fcb981e528d142eac8e421019e85b5fc8e6965d7a400999358c7f725a19bc2e538aef1598936ad7f56f7424e";
 static_assert(sizeof(GENESIS_COINBASE_TX_HEX)/sizeof(*GENESIS_COINBASE_TX_HEX) != 1, "GENESIS_COINBASE_TX_HEX must not be empty.");
 
 /* This is the unix timestamp of the first "mined" block (technically block 2, not the genesis block)
    You can get this value by doing "print_block 2" in TurtleCoind. It is used to know what timestamp
    to import from when the block height cannot be found in the node or the node is offline. */
-const uint64_t GENESIS_BLOCK_TIMESTAMP                       = 1547476530;
+const uint64_t GENESIS_BLOCK_TIMESTAMP                       = 1549164877;
 
 const size_t   CRYPTONOTE_REWARD_BLOCKS_WINDOW               = 100;
 const size_t   CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE     = 100000; //size of block (bytes) after which reward for block calculated using block size
@@ -112,7 +112,7 @@ const uint32_t KEY_IMAGE_CHECKING_BLOCK_INDEX                = 0;
 const uint32_t UPGRADE_HEIGHT_V2                             = 1;
 const uint32_t UPGRADE_HEIGHT_V3                             = 2;
 const uint32_t UPGRADE_HEIGHT_V4                             = 3; // Upgrade height for CN-Lite Variant 1 switch.
-const uint32_t UPGRADE_HEIGHT_V5                             = 4; // Upgrade height for CN-Turtle Variant 2 switch.
+const uint32_t UPGRADE_HEIGHT_V5                             = 4; // Upgrade height for CN-Soft Shell Variant 1 switch.
 const uint32_t UPGRADE_HEIGHT_CURRENT                        = UPGRADE_HEIGHT_V5;
 
 const unsigned UPGRADE_VOTING_THRESHOLD                      = 90;               // percent
@@ -151,7 +151,7 @@ const char     P2P_NET_DATA_FILENAME[]                       = "p2pstate.bin";
 const char     MINER_CONFIG_FILE_NAME[]                      = "miner_conf.json";
 } // parameters
 
-const char     CRYPTONOTE_NAME[]                             = "_Excelsior";
+const char     CRYPTONOTE_NAME[]                             = "Excelsior";
 
 const uint8_t  TRANSACTION_VERSION_1                         =  1;
 const uint8_t  TRANSACTION_VERSION_2                         =  2;
@@ -170,9 +170,9 @@ const size_t   BLOCKS_IDS_SYNCHRONIZING_DEFAULT_COUNT        =  10000;  //by def
 const size_t   BLOCKS_SYNCHRONIZING_DEFAULT_COUNT            =  100;    //by default, blocks count in blocks downloading
 const size_t   COMMAND_RPC_GET_BLOCKS_FAST_MAX_COUNT         =  1000;
 
-const int      P2P_DEFAULT_PORT                              =  29801;
-const int      RPC_DEFAULT_PORT                              =  29802;
-const int      SERVICE_DEFAULT_PORT                          =  4050;
+const int      P2P_DEFAULT_PORT                              =  19801;
+const int      RPC_DEFAULT_PORT                              =  19802;
+const int      SERVICE_DEFAULT_PORT                          =  4455;
 
 const size_t   P2P_LOCAL_WHITE_PEERLIST_LIMIT                =  1000;
 const size_t   P2P_LOCAL_GRAY_PEERLIST_LIMIT                 =  5000;
@@ -210,7 +210,7 @@ const char     LATEST_VERSION_URL[]                          = "https://github.c
 const std::string LICENSE_URL                                = "https://github.com/xlscoin/excelsior/blob/master/LICENSE";
 const static   boost::uuids::uuid CRYPTONOTE_NETWORK         =
 {
-    {  0x00, 0x78, 0x63, 0x65, 0x6c, 0x73, 0x69, 0x6f, 0x72, 0x62, 0x79, 0x6d, 0x6f, 0x72, 0x70, 0x68  }
+    {  0x65, 0x78, 0x63, 0x65, 0x6c, 0x73, 0x69, 0x6f, 0x72, 0x62, 0x79, 0x6d, 0x6f, 0x72, 0x70, 0x68  }
 };
 
 const char* const SEED_NODES[] = {
