@@ -20,9 +20,10 @@
 #include <list>
 #include <ostream>
 #include <unordered_set>
+#include <optional> // Boost removed
 
 #include <boost/uuid/uuid.hpp>
-#include <boost/optional.hpp>
+//include <boost/optional.hpp>
 #include "Common/StringTools.h"
 #include "crypto/hash.h"
 
