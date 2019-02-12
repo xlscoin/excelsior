@@ -426,8 +426,12 @@ int CryptoNoteProtocolHandler::handle_notify_new_transactions(int command, NOTIF
     //TODO: add announce usage here
     relay_post_notify<NOTIFY_NEW_TRANSACTIONS>(*m_p2p, arg, &context.m_connection_id);
   }
-
-  return true;
+  if(context.m_pending_lite_block.has_value()) {
+      logger(Logging::TRACE) << context << " Pending lite block detected, trying to reevaluate transaction details";
+      return doPushLiteBlock(context.m_pending_lite_block->request, context);
+  } else {
+      return true;
+  }
 }
 
 int CryptoNoteProtocolHandler::handle_request_get_objects(int command, NOTIFY_REQUEST_GET_OBJECTS::request& arg, CryptoNoteConnectionContext& context) {
@@ -604,7 +608,8 @@ int CryptoNoteProtocolHandler::doPushLiteBlock(NOTIFY_NEW_LITE_BLOCK::request ar
    * of the lite-block request
    */
     if (need_txs.empty()) {
-        auto result = m_core.addBlock(RawBlock{arg.blockTemplate, have_txs});
+        context.m_pending_lite_block = std::nullopt; 
+	auto result = m_core.addBlock(RawBlock{arg.blockTemplate, have_txs});
         if (result == error::AddBlockErrorCondition::BLOCK_ADDED) {
             if (result == error::AddBlockErrorCode::ADDED_TO_ALTERNATIVE_AND_SWITCHED) {
                 ++arg.hop;
@@ -634,17 +639,24 @@ int CryptoNoteProtocolHandler::doPushLiteBlock(NOTIFY_NEW_LITE_BLOCK::request ar
         }
     }
     else {
-        NOTIFY_MISSING_TXS::request req;
-        req.current_blockchain_height = arg.current_blockchain_height;
-        req.blockHash = CachedBlock(newBlockTemplate).getBlockHash();
-        req.missing_txs = std::move(need_txs);
-        context.m_pending_lite_block = PendingLiteBlock{arg, {req.missing_txs.begin(), req.missing_txs.end()}};
+	  if(context.m_pending_lite_block.has_value()) {
+	     context.m_pending_lite_block = std::nullopt;
+	     logger(Logging::DEBUGGING) << context << " Peer has a pending lite block but did not provide all necessary transactions, dropping connection.";
+	     context.m_state= CryptoNoteConnectionContext::state_shutdown;
+          }
+	  else {
+	  NOTIFY_MISSING_TXS::request req;
+          req.current_blockchain_height = arg.current_blockchain_height;
+          req.blockHash = CachedBlock(newBlockTemplate).getBlockHash();
+          req.missing_txs = std::move(need_txs);
+          context.m_pending_lite_block = PendingLiteBlock{arg, {req.missing_txs.begin(), req.missing_txs.end()}};
 
-        if (!post_notify<NOTIFY_MISSING_TXS>(*m_p2p, req, context)) {
-            logger(Logging::ERROR)
+            if (!post_notify<NOTIFY_MISSING_TXS>(*m_p2p, req, context)) {
+                logger(Logging::DEBUGGING)
                 << context << "Lite block is missing transactions but the publisher is not reachable, dropping connection.";
-            context.m_state = CryptoNoteConnectionContext::state_shutdown;
-        }
+                context.m_state = CryptoNoteConnectionContext::state_shutdown;
+            }
+	  }
     }
 
     return 1;
