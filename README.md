@@ -107,7 +107,7 @@ The binaries will be in the `src` folder when you are complete.
 - `export CC=gcc-8`
 - `export CXX=g++-8`
 - `git clone -b master --single-branch https://github.com/xlscoin/excelsior`
-- `cd Excelsior`
+- `cd excelsior`
 - `mkdir build`
 - `cd build`
 - `cmake ..`

@@ -146,7 +146,7 @@ const char     P2P_NET_DATA_FILENAME[]                       = "p2pstate.bin";
 const char     MINER_CONFIG_FILE_NAME[]                      = "miner_conf.json";
 } // parameters
 
-const char     CRYPTONOTE_NAME[]                             = "_Excelsior";
+const char     CRYPTONOTE_NAME[]                             = "Excelsior";
 
 const uint8_t  TRANSACTION_VERSION_1                         =  1;
 const uint8_t  TRANSACTION_VERSION_2                         =  2;
@@ -165,9 +165,9 @@ const size_t   BLOCKS_IDS_SYNCHRONIZING_DEFAULT_COUNT        =  10000;  //by def
 const uint64_t BLOCKS_SYNCHRONIZING_DEFAULT_COUNT            =  100;    //by default, blocks count in blocks downloading
 const size_t   COMMAND_RPC_GET_BLOCKS_FAST_MAX_COUNT         =  1000;
 
-const int      P2P_DEFAULT_PORT                              =  29801;
-const int      RPC_DEFAULT_PORT                              =  29802;
-const int      SERVICE_DEFAULT_PORT                          =  4050;
+const int      P2P_DEFAULT_PORT                              =  19801;
+const int      RPC_DEFAULT_PORT                              =  19802;
+const int      SERVICE_DEFAULT_PORT                          =  4455;
 
 const size_t   P2P_LOCAL_WHITE_PEERLIST_LIMIT                =  1000;
 const size_t   P2P_LOCAL_GRAY_PEERLIST_LIMIT                 =  5000;
@@ -205,13 +205,13 @@ const char     LATEST_VERSION_URL[]                          = "https://github.c
 const std::string LICENSE_URL                                = "https://github.com/xlscoin/excelsior/blob/master/LICENSE";
 const static   boost::uuids::uuid CRYPTONOTE_NETWORK         =
 {
-    {  0x00, 0x78, 0x63, 0x65, 0x6c, 0x73, 0x69, 0x6f, 0x72, 0x62, 0x79, 0x6d, 0x6f, 0x72, 0x70, 0x68  }
+    {  0x65, 0x78, 0x63, 0x65, 0x6c, 0x73, 0x69, 0x6f, 0x72, 0x62, 0x79, 0x6d, 0x6f, 0x72, 0x70, 0x68  }
 };
 
 const char* const SEED_NODES[] = {
-  "185.17.27.105:29801",   //
-  "104.238.222.130:29801", //
-  "185.103.97.205:29801",  //
-  "97.64.253.98:29801"     //
+  "185.17.27.105:19801",   //
+  "104.238.222.130:19801", //
+  "185.103.97.205:19801",  //
+  "97.64.253.98:19801"     //
 };
 } // CryptoNote
