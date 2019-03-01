@@ -64,7 +64,7 @@ You need to modify the below command for your version of ubuntu - see https://ap
 - `export CC=clang-6.0`
 - `export CXX=clang++-6.0`
 - `git clone -b master --single-branch https://github.com/xlscoin/excelsior`
-- `cd Excelsior`
+- `cd excelsior`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
@@ -131,7 +131,7 @@ The binaries will be in the `src` folder when you are complete.
 - `export CC=/usr/local/opt/llvm/bin/clang`
 - `export CXX=/usr/local/opt/llvm/bin/clang++`
 - `git clone -b master --single-branch https://github.com/xlscoin/excelsior`
-- `cd Excelsior`
+- `cd excelsior`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
@@ -170,7 +170,7 @@ The binaries will be in the `src/Release` folder when you are complete.
 - `cd Release`
 - `Excelsiord.exe --version`
 
-#### Raspberry Pi 3 B+
+#### Raspberry Pi 3 B+ (AARCH64/ARM64)
 The following images are known to work. Your operation system image **MUST** be 64 bit.
 
 ##### Known working images
@@ -184,7 +184,7 @@ Once you have a 64 bit image installed, setup proceeds the same as any Linux dis
 ##### Building
 
 - `git clone -b master --single-branch https://github.com/xlscoin/excelsior`
-- `cd Excelsior`
+- `cd excelsior`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
@@ -196,4 +196,16 @@ The binaries will be in the `src` folder when you are complete.
 - `./Excelsiord --version`
 
 #### Thanks
-Cryptonote Developers, Bytecoin Developers, Monero Developers, Forknote Project, TurtleCoin Community, DeroGold Association
+Cryptonote Developers, Bytecoin Developers, Monero Developers, Forknote Project, TurtleCoin Community
+
+### Copypasta for license when editing files
+
+Hi TurtleCoin contributor, thanks for forking and sending back Pull Requests. Extensive docs about contributing are in the works or elsewhere. For now this is the bit we need to get into all the files we touch. Please add it to the top of the files, see [src/CryptoNoteConfig.h](https://github.com/turtlecoin/turtlecoin/commit/28cfef2575f2d767f6e512f2a4017adbf44e610e) for an example.
+
+```
+// Copyright (c) 2012-2017, The CryptoNote developers, The Bytecoin developers
+// Copyright (c) 2014-2018, The Monero Project
+// Copyright (c) 2018, The TurtleCoin Developers
+//
+// Please see the included LICENSE file for more information.
+```

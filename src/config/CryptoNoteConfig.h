@@ -1,8 +1,8 @@
 // Copyright (c) 2012-2017, The CryptoNote developers, The Bytecoin developers
 // Copyright (c) 2014-2018, The Monero Project
-// Copyright (c) 2018, The TurtleCoin Developers
-// Copyright (c) 2018, The DeroGold Association
-// Copyright (c) 2019, The Excelsior Developer
+// Copyright (c) 2018-2019, The TurtleCoin Developers
+// Copyright (c) 2018-2019, The DeroGold Association
+// Copyright (c) 2019, The Excelsior Developers
 //
 // Please see the included LICENSE file for more information.
 
@@ -36,35 +36,27 @@ const unsigned EMISSION_SPEED_FACTOR                         = 24;
 static_assert(EMISSION_SPEED_FACTOR <= 8 * sizeof(uint64_t), "Bad EMISSION_SPEED_FACTOR");
 
 /* Premine amount */
-const uint64_t GENESIS_BLOCK_REWARD                          = UINT64_C(1234567890);
+const uint64_t GENESIS_BLOCK_REWARD                          = UINT64_C(1100000000000);
 
 /* How to generate a premine:
-
 * Compile your code
-
 * Run zedwallet, ignore that it can't connect to the daemon, and generate an
   address. Save this and the keys somewhere safe.
-
 * Launch the daemon with these arguments:
 --print-genesis-tx --genesis-block-reward-address <premine wallet address>
-
 For example:
 Excelsiord --print-genesis-tx --genesis-block-reward-address XL4QZU4Nsxm6JdXWetmGbdchPo8E5TxgJFnWWTrDRaEQ5suw7mXUqVVEiBJtqYCv7BJT7WwRB65xCcX9Y1pZhAMW2X3RPBjCH
-
 * Take the hash printed, and replace it with the hash below in GENESIS_COINBASE_TX_HEX
-
 * Recompile, setup your seed nodes, and start mining
-
 * You should see your premine appear in the previously generated wallet.
-
 */
-const char GENESIS_COINBASE_TX_HEX[] = "015001ff0001d285d8cc040289a21aa140faff4f1c11bfc012b79d814db3a8ed890eccac5b9f0f9f286663d82101862b52488fc31e62e26bf66e50314b5355974633eb1579e236a6af3a415187c9";
+const char GENESIS_COINBASE_TX_HEX[] = "015001ff000180f0efe8812002a8f723cdbc4901f9a60501e5d57e2fa3f0273ca5dc22fcb981e528d142eac8e421019e85b5fc8e6965d7a400999358c7f725a19bc2e538aef1598936ad7f56f7424e";
 static_assert(sizeof(GENESIS_COINBASE_TX_HEX)/sizeof(*GENESIS_COINBASE_TX_HEX) != 1, "GENESIS_COINBASE_TX_HEX must not be empty.");
 
 /* This is the unix timestamp of the first "mined" block (technically block 2, not the genesis block)
    You can get this value by doing "print_block 2" in TurtleCoind. It is used to know what timestamp
    to import from when the block height cannot be found in the node or the node is offline. */
-const uint64_t GENESIS_BLOCK_TIMESTAMP                       = 1547476530;
+const uint64_t GENESIS_BLOCK_TIMESTAMP                       = 1549164877;
 
 const size_t   CRYPTONOTE_REWARD_BLOCKS_WINDOW               = 100;
 const size_t   CRYPTONOTE_BLOCK_GRANTED_FULL_REWARD_ZONE     = 100000; //size of block (bytes) after which reward for block calculated using block size
@@ -95,6 +87,8 @@ const size_t   MAX_BLOCK_SIZE_INITIAL                        = 100000;
 const uint64_t MAX_BLOCK_SIZE_GROWTH_SPEED_NUMERATOR         = 100 * 1024;
 const uint64_t MAX_BLOCK_SIZE_GROWTH_SPEED_DENOMINATOR       = 365 * 24 * 60 * 60 / DIFFICULTY_TARGET;
 const uint64_t MAX_EXTRA_SIZE                                = 140000;
+const uint64_t MAX_EXTRA_SIZE_V2                             = 1024;
+const uint64_t MAX_EXTRA_SIZE_V2_HEIGHT                      = 55000;
 
 const uint64_t CRYPTONOTE_LOCKED_TX_ALLOWED_DELTA_BLOCKS     = 1;
 const uint64_t CRYPTONOTE_LOCKED_TX_ALLOWED_DELTA_SECONDS    = DIFFICULTY_TARGET * CRYPTONOTE_LOCKED_TX_ALLOWED_DELTA_BLOCKS;
@@ -112,7 +106,7 @@ const uint32_t KEY_IMAGE_CHECKING_BLOCK_INDEX                = 0;
 const uint32_t UPGRADE_HEIGHT_V2                             = 1;
 const uint32_t UPGRADE_HEIGHT_V3                             = 2;
 const uint32_t UPGRADE_HEIGHT_V4                             = 3; // Upgrade height for CN-Lite Variant 1 switch.
-const uint32_t UPGRADE_HEIGHT_V5                             = 4; // Upgrade height for CN-Turtle Variant 2 switch.
+const uint32_t UPGRADE_HEIGHT_V5                             = 4; // Upgrade height for CN-Soft Shell Variant 1 switch.
 const uint32_t UPGRADE_HEIGHT_CURRENT                        = UPGRADE_HEIGHT_V5;
 
 const unsigned UPGRADE_VOTING_THRESHOLD                      = 90;               // percent
@@ -124,7 +118,8 @@ static_assert(UPGRADE_VOTING_WINDOW > 1, "Bad UPGRADE_VOTING_WINDOW");
 /* Block heights we are going to have hard forks at */
 const uint64_t FORK_HEIGHTS[] =
 {
-    10000000
+    55000   // 0
+    1000000 // 1
 };
 
 /* MAKE SURE TO UPDATE THIS VALUE WITH EVERY MAJOR RELEASE BEFORE A FORK */
@@ -167,7 +162,7 @@ const uint8_t  BLOCK_MINOR_VERSION_0                         =  0;
 const uint8_t  BLOCK_MINOR_VERSION_1                         =  1;
 
 const size_t   BLOCKS_IDS_SYNCHRONIZING_DEFAULT_COUNT        =  10000;  //by default, blocks ids count in synchronizing
-const size_t   BLOCKS_SYNCHRONIZING_DEFAULT_COUNT            =  100;    //by default, blocks count in blocks downloading
+const uint64_t BLOCKS_SYNCHRONIZING_DEFAULT_COUNT            =  100;    //by default, blocks count in blocks downloading
 const size_t   COMMAND_RPC_GET_BLOCKS_FAST_MAX_COUNT         =  1000;
 
 const int      P2P_DEFAULT_PORT                              =  29801;
