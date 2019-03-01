@@ -64,7 +64,7 @@ You need to modify the below command for your version of ubuntu - see https://ap
 - `export CC=clang-6.0`
 - `export CXX=clang++-6.0`
 - `git clone -b master --single-branch https://github.com/xlscoin/excelsior`
-- `cd Excelsior`
+- `cd excelsior`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
@@ -107,7 +107,7 @@ The binaries will be in the `src` folder when you are complete.
 - `export CC=gcc-8`
 - `export CXX=g++-8`
 - `git clone -b master --single-branch https://github.com/xlscoin/excelsior`
-- `cd Excelsior`
+- `cd excelsior`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
@@ -131,7 +131,7 @@ The binaries will be in the `src` folder when you are complete.
 - `export CC=/usr/local/opt/llvm/bin/clang`
 - `export CXX=/usr/local/opt/llvm/bin/clang++`
 - `git clone -b master --single-branch https://github.com/xlscoin/excelsior`
-- `cd Excelsior`
+- `cd excelsior`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
@@ -184,7 +184,7 @@ Once you have a 64 bit image installed, setup proceeds the same as any Linux dis
 ##### Building
 
 - `git clone -b master --single-branch https://github.com/xlscoin/excelsior`
-- `cd Excelsior`
+- `cd excelsior`
 - `mkdir build`
 - `cd build`
 - `cmake ..`
